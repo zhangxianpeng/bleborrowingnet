@@ -1,8 +1,5 @@
 package com.inmoglass.pantest;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,11 +14,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.inmo.bleborrowingnet.BluetoothPanUtils;
+
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "pantest";
     Button connect, disConnect;
     TextView state;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private void checkPan() {
         boolean isConnected = getPanState();
         Log.i(TAG, "PAN isConnected: " + isConnected);
-        if(!isConnected) {
+        if (!isConnected) {
             BluetoothPanUtils.getInstance().getConnectedDeviceAndConnectNetwork();
 //            handler.sendEmptyMessageDelayed(1, 1000);
         }
@@ -85,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getAction().equalsIgnoreCase(ConnectivityManager.CONNECTIVITY_ACTION)) {
+            if (intent.getAction().equalsIgnoreCase(ConnectivityManager.CONNECTIVITY_ACTION)) {
                 Log.i(TAG, "ConnectivityManager.CONNECTIVITY_ACTION");
                 info = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_BLUETOOTH);
-                if(info!=null) {
+                if (info != null) {
                     Log.i(TAG, "TYPE_BLUETOOTH: " + info.isConnected());
                     updateState(info.isConnected());
                 }

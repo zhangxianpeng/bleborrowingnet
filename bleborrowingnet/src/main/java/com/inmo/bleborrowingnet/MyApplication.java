@@ -1,4 +1,4 @@
-package com.inmoglass.pantest;
+package com.inmo.bleborrowingnet;
 
 import android.app.Application;
 import android.content.Context;
