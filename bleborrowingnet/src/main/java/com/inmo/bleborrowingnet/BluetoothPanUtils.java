@@ -45,7 +45,7 @@ public class BluetoothPanUtils {
     }
 
     public void getPanProfile() {
-        boolean isGet = BluetoothAdapter.getDefaultAdapter().getProfileProxy(MyApplication.instance, mProfileServiceListener, 5);
+        boolean isGet = BluetoothAdapter.getDefaultAdapter().getProfileProxy(BaseApplication.getContext(), mProfileServiceListener, 5);
         Log.i("BluetoothPanUtils", "isGet: " + isGet);
     }
 
